@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oak Valley - Competitive Market Analysis | MarketPrime Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+/* ===========================
+   FINANCIAL PROFESSIONAL THEME
+   MarketPrime - Market Intelligence
+   ===========================*/
+
+/* ===========================
+   RESET & BASE
+   ===========================*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f8f9fa;
+    color: #212529;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================
+   TYPOGRAPHY
+   ===========================*/
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1a2332;
+}
+
+p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+a {
+    color: #2c5aa0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #4a9eff;
+}
+
+/* ===========================
+   HEADER
+   ===========================*/
+.main-header {
+    background: #35a635;
+    border-bottom: 3px solid #2c5aa0;
+    padding: 0;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+.header-tagline {
+    margin: 4px 0 0 0;
+    font-size: 12px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 40px;
+}
+
+.header-nav a {
+    color: #8a93a3;
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.header-nav a:hover,
+.header-nav a.active {
+    color: #4a9eff;
+}
+
+.header-nav a.active {
+    font-weight: 700;
+    border-bottom: 2px solid #4a9eff;
+    padding-bottom: 4px;
+}
+
+/* ===========================
+   BREADCRUMB
+   ===========================*/
+.breadcrumb-bar {
+    background: #9df79d;
+    border-bottom: 1px solid #34495e;
+    padding: 16px 0;
+}
+
+.breadcrumb-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.breadcrumb {
+    margin: 0;
+    font-size: 13px;
+    color: #95a5a6;
+}
+
+.breadcrumb a {
+    color: black;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #ecf0f1;
+}
+
+.breadcrumb-separator {
+    color: #7f8c8d;
+    margin: 0 8px;
+}
+
+.breadcrumb-current {
+    color: black;
+    font-weight: 600;
+}
+
+/* ===========================
+   CONTAINER
+   ===========================*/
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px 40px;
+}
+
+/* ===========================
+   CARDS & SECTIONS
+   ===========================*/
+.card {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 32px;
+    margin-bottom: 24px;
+}
+
+.section {
+    margin-bottom: 48px;
+}
+
+.section-header {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a2332;
+    margin: 0 0 32px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 3px solid #2c5aa0;
+    padding-bottom: 12px;
+}
+
+/* ===========================
+   STATS
+   ===========================*/
+.stats-bar {
+    display: flex;
+    gap: 32px;
+    padding: 20px 0;
+    border-top: 2px solid #dee2e6;
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 32px;
+}
+
+.stat-item {
+    text-align: left;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: #2c5aa0;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===========================
+   TABLES
+   ===========================*/
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid #dee2e6;
+}
+
+.data-table thead {
+    background: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.data-table th {
+    padding: 16px 24px;
+    text-align: left;
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-table td {
+    padding: 20px 24px;
+    color: #495057;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.data-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ===========================
+   BADGES
+   ===========================*/
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-high {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.badge-medium {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.badge-low {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-info {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.badge-strong {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-weak {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.badge-very-strong {
+    background: #28a745;
+    color: white;
+}
+
+/* ===========================
+   BUTTONS
+   ===========================*/
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: #2c5aa0;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #4a9eff;
+    color: white;
+}
+
+/* ===========================
+   GRID SYSTEMS
+   ===========================*/
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+/* ===========================
+   FEATURE BOXES
+   ===========================*/
+.feature-box {
+    background: white;
+    border: 1px solid #dee2e6;
+    padding: 32px;
+}
+
+.feature-icon {
+    color: #2c5aa0;
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.feature-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a2332;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.feature-description {
+    font-size: 14px;
+    color: #495057;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ===========================
+   CTA SECTIONS
+   ===========================*/
+.cta-section {
+    background: #1a2332;
+    border-left: 4px solid #2c5aa0;
+    padding: 48px;
+    text-align: center;
+    margin: 48px 0;
+}
+
+.cta-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cta-description {
+    font-size: 16px;
+    color: #8a93a3;
+    margin: 0 0 32px 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* ===========================
+   FOOTER
+   ===========================*/
+.main-footer {
+    background: #35a635;
+    border-top: 1px solid #2c3e50;
+    padding: 24px 0;
+    margin-top: 64px;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    text-align: center;
+}
+
+.footer-text {
+    margin: 0;
+    font-size: 12px;
+    color: white;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   ===========================*/
+@media (max-width: 1024px) {
+    .header-container,
+    .breadcrumb-container,
+    .container,
+    .footer-container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .header-nav {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .stats-bar {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .data-table {
+        font-size: 13px;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 12px 16px;
+    }
+}
+
+/* ===========================
+   UTILITY CLASSES
+   ===========================*/
+.text-center {
+    text-align: center;
+}
+
+.mb-3 { margin-bottom: 24px; }
+.mb-4 { margin-bottom: 32px; }
+.mt-3 { margin-top: 24px; }
+
+.alert {
+    padding: 20px 24px;
+    border-left: 4px solid;
+    margin-bottom: 24px;
+}
+
+.alert-success {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.alert-warning {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <h1>Canopy Management</h1>
+                <p class="header-tagline">Competitive Market Analysis</p>
+            </div>
+            
+        </div>
+    </header>
+
+    
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        
+        <!-- EXECUTIVE SUMMARY -->
+        <section class="section">
+            <h2 class="section-header">Oak Valley Design Competitive Analysis</h2>
+            
+            <div class="card">
+                <h3 style="color: #1a2332; margin-bottom: 16px; font-size: 20px;">Executive Summary</h3>
+                <p>Oak Valley Designs occupies a <strong>premium positioning</strong> in a highly competitive marketplace dominated by Chinese sellers. With the highest price point ($279.99) and strong brand strength, Oak Valley differentiates through quality and US-based authenticity, though faces significant volume challenges against lower-priced competitors.</p>
+            </div>
+
+            <!-- KEY STATS -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-value">$598,180</span>
+                    <span class="stat-label">Monthly Revenue (Highest)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">1,938</span>
+                    <span class="stat-label">Monthly Units</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">$279.99</span>
+                    <span class="stat-label">Price Point (Premium)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">4.7 ★</span>
+                    <span class="stat-label">Customer Rating</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">189</span>
+                    <span class="stat-label">Keywords Page 1</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPETITIVE ADVANTAGES -->
+        <section class="section">
+            <h2 class="section-header">Competitive Position</h2>
+            
+            <div class="grid-2">
+                <div class="feature-box">
+                    <span class="feature-icon">✓</span>
+                    <h3 class="feature-title">Strengths</h3>
+                    <div class="feature-description">
+                        <p><strong>Premium Revenue Leader:</strong> Highest monthly revenue ($598K) through premium pricing strategy</p>
+                        <p><strong>Top-Tier Rating:</strong> 4.7 rating demonstrates excellent customer satisfaction</p>
+                        <p><strong>US-Based Authenticity:</strong> One of only 3 US sellers vs 16 Chinese competitors</p>
+                        <p><strong>Strong Brand:</strong> Established brand recognition without ad dependency</p>
+                    </div>
+                </div>
+
+                <div class="feature-box">
+                    <span class="feature-icon">⚠</span>
+                    <h3 class="feature-title">Critical Weaknesses</h3>
+                    <div class="feature-description">
+                        <p><strong>Limited Search Visibility:</strong> Only 189 keywords on Page 1 (lowest among competitors)</p>
+                        <p><strong>Price Barrier:</strong> 3.7x more expensive than average competitor</p>
+                        <p><strong>Review Volume Gap:</strong> Moderate reviews vs high-volume competitors</p>
+                        <p><strong>SEO Underperformance:</strong> Share of voice significantly below top competitors</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MARKET ALERTS -->
+        <section class="section">
+            <h2 class="section-header">Market Alerts</h2>
+            
+            <div class="alert alert-danger">
+                <strong>🔴 Critical Threat:</strong> COSY HOMEER leads with 12,585 units/month at $76.49 with matching 4.7 rating - 6.5x your volume at 27% of your price
+            </div>
+            
+            <div class="alert alert-warning">
+                <strong>🟡 SEO Emergency:</strong> Your 189 P1 keywords vs competitor average of 350+ represents significant visibility gap
+            </div>
+            
+            <div class="alert alert-success">
+                <strong>🟢 Revenue Leadership:</strong> Despite lower units, you generate highest revenue demonstrating pricing power and brand strength
+            </div>
+        </section>
+
+        <!-- TOP COMPETITORS TABLE -->
+        <section class="section">
+            <h2 class="section-header">Top 10 Competitors Analysis</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Reviews</th>
+                        <th>Monthly Sales</th>
+                        <th>Revenue</th>
+                        <th>P1 Keywords</th>
+                        <th>Brand Strength</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #fff9e6;">
+                        <td><strong>15</strong></td>
+                        <td><strong>Oak Valley</strong></td>
+                        <td><strong>$279.99</strong></td>
+                        <td>4.7</td>
+                        <td>1,171</td>
+                        <td>1,938</td>
+                        <td><strong>$598,180</strong></td>
+                        <td style="color: #dc3545;">189</td>
+                        <td><span class="badge badge-strong">Strong</span></td>
+                        <td>🇺🇸 US</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>COSY HOMEER</td>
+                        <td>$76.49</td>
+                        <td>4.7</td>
+                        <td>7,088</td>
+                        <td><strong>12,585</strong></td>
+                        <td>$962,627</td>
+                        <td>464</td>
+                        <td><span class="badge badge-very-strong">Very Strong</span></td>
+                        <td>🇨🇳 CN</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>KOOTETA</td>
+                        <td>$39.98</td>
+                        <td>4.6</td>
+                        <td>3,041</td>
+                        <td>6,160</td>
+                        <td>$307,938</td>
+                        <td>453</td>
+                        <td><span class="badge badge-very-strong">Very Strong</span></td>
+                        <td>🇨🇳 CN</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Gmonby</td>
+                        <td>$25.49</td>
+                        <td>4.4</td>
+                        <td>1,440</td>
+                        <td>5,357</td>
+                        <td>$136,550</td>
+                        <td>426</td>
+                        <td><span class="badge badge-very-strong">Very Strong</span></td>
+                        <td>🇨🇳 CN</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>THUNDER GRIP</td>
+                        <td>$32.99</td>
+                        <td>4.4</td>
+                        <td>1,883</td>
+                        <td>5,268</td>
+                        <td>$173,791</td>
+                        <td>218</td>
+                        <td><span class="badge badge-weak">Weak</span></td>
+                        <td>🇷🇴 RO</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>PADOOR</td>
+                        <td>$59.99</td>
+                        <td>4.4</td>
+                        <td>409</td>
+                        <td>4,014</td>
+                        <td>$240,800</td>
+                        <td>428</td>
+                        <td><span class="badge badge-very-strong">Very Strong</span></td>
+                        <td>🇨🇳 CN</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>MBIGM</td>
+                        <td>$39.99</td>
+                        <td>4.5</td>
+                        <td><strong>8,035</strong></td>
+                        <td>3,630</td>
+                        <td>$145,164</td>
+                        <td>392</td>
+                        <td><span class="badge badge-very-strong">Very Strong</span></td>
+                        <td>🇸🇬 SG</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>PURE ERA</td>
+                        <td>$129.99</td>
+                        <td>4.5</td>
+                        <td>2,510</td>
+                        <td>3,604</td>
+                        <td>$468,484</td>
+                        <td>233</td>
+                        <td><span class="badge badge-strong">Strong</span></td>
+                        <td>🇺🇸 US</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>sarben</td>
+                        <td>$56.99</td>
+                        <td>4.3</td>
+                        <td>515</td>
+                        <td>3,502</td>
+                        <td>$199,579</td>
+                        <td>399</td>
+                        <td><span class="badge badge-very-strong">Very Strong</span></td>
+                        <td>🇨🇳 CN</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>PATTENGO</td>
+                        <td>$49.99</td>
+                        <td>4.6</td>
+                        <td>853</td>
+                        <td>2,738</td>
+                        <td>$136,873</td>
+                        <td>400</td>
+                        <td><span class="badge badge-very-strong">Very Strong</span></td>
+                        <td>🇨🇳 CN</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>PURE ERA</td>
+                        <td>$111.99</td>
+                        <td>4.5</td>
+                        <td>1,139</td>
+                        <td>2,466</td>
+                        <td>$276,167</td>
+                        <td>302</td>
+                        <td><span class="badge badge-strong">Strong</span></td>
+                        <td>🇺🇸 US</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- STRATEGIC RECOMMENDATIONS -->
+        <section class="section">
+            <h2 class="section-header">Strategic Recommendations</h2>
+            
+            <div class="grid-3">
+                <div class="feature-box">
+                    <span class="feature-icon">1</span>
+                    <h3 class="feature-title">Immediate: SEO Emergency Response</h3>
+                    <div class="feature-description">
+                        <p>Audit why Oak Valley has only 189 P1 keywords vs 400+ for competitors. Optimize listings for high-volume search terms. Target: Double P1 keywords to 375+ within 60 days.</p>
+                    </div>
+                </div>
+
+                <div class="feature-box">
+                    <span class="feature-icon">2</span>
+                    <h3 class="feature-title">Immediate: Review Velocity Program</h3>
+                    <div class="feature-description">
+                        <p>Accelerate review generation from current 1,171. Target 2,000+ reviews in 90 days through post-purchase engagement sequences.</p>
+                    </div>
+                </div>
+
+                <div class="feature-box">
+                    <span class="feature-icon">3</span>
+                    <h3 class="feature-title">30-90 Days: Mid-Tier Product Launch</h3>
+                    <div class="feature-description">
+                        <p>Consider $129-149 price point to capture PURE ERA territory. Capture customers priced out of $280 tier while maintaining premium positioning.</p>
+                    </div>
+                </div>
+
+                <div class="feature-box">
+                    <span class="feature-icon">4</span>
+                    <h3 class="feature-title">30-90 Days: Advertising Test Program</h3>
+                    <div class="feature-description">
+                        <p>Test selective PPC on 50-100 strategic keywords. Focus on brand defense and category dominance rather than mass advertising.</p>
+                    </div>
+                </div>
+
+                <div class="feature-box">
+                    <span class="feature-icon">5</span>
+                    <h3 class="feature-title">60-90 Days: US-Made Positioning Campaign</h3>
+                    <div class="feature-description">
+                        <p>Amplify "Made in USA" differentiation against 16 Chinese competitors. Create content highlighting domestic craftsmanship and quality.</p>
+                    </div>
+                </div>
+
+                <div class="feature-box">
+                    <span class="feature-icon">6</span>
+                    <h3 class="feature-title">90+ Days: Market Segmentation Strategy</h3>
+                    <div class="feature-description">
+                        <p>Develop distinct product lines for different price tiers. Maintain ultra-premium flagship while launching mid-premium sub-brand.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEY INSIGHTS -->
+        <section class="section">
+            <h2 class="section-header">Key Market Insights</h2>
+            
+            <div class="card">
+                <h3 style="color: #1a2332; margin-bottom: 20px; font-size: 18px;">Price-Quality Spectrum</h3>
+                <p><strong>Budget Tier ($25-40):</strong> 5,000-6,000+ units/month - Mass market volume play</p>
+                <p><strong>Mid-Market ($40-80):</strong> 2,000-4,000 units/month - Competitive battleground</p>
+                <p><strong>Premium ($110-130):</strong> 1,200-3,600 units/month - Quality-conscious buyers</p>
+                <p><strong>Ultra-Premium ($280):</strong> 1,900 units/month - Oak Valley's exclusive territory</p>
+            </div>
+
+            <div class="card">
+                <h3 style="color: #1a2332; margin-bottom: 20px; font-size: 18px;">Market Composition</h3>
+                <p><strong>Chinese Sellers:</strong> 16 of 20 competitors (80%) - Market saturation creates differentiation opportunity</p>
+                <p><strong>US Sellers:</strong> Only 3 brands including Oak Valley - Authenticity advantage in crowded market</p>
+                <p><strong>Total Market:</strong> ~62,000 units/month, $4.5M revenue - Oak Valley holds 3.1% units, 13.3% revenue</p>
+            </div>
+
+            <div class="card">
+                <h3 style="color: #1a2332; margin-bottom: 20px; font-size: 18px;">Advertising Landscape</h3>
+                <p><strong>Heavy Advertisers:</strong> COSY HOMEER (317 keywords) - High spend, high volume</p>
+                <p><strong>Minimal Advertisers:</strong> KOOTETA (41 keywords) - Strong organic showing volume possible without ads</p>
+                <p><strong>Organic Players:</strong> Oak Valley (0 keywords) - Pure brand strength, opportunity for selective testing</p>
+            </div>
+        </section>
+
+        
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p class="footer-text">© 2025 Canopy Management. Competitive Analysis Updated October 28, 2025.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
