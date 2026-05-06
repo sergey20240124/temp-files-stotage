@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oak Valley Designs — SQP Analysis · April 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#212529;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-weight:700;line-height:1.2;color:#1a2332}
+p{margin-bottom:1rem;line-height:1.6}
+a{color:#2c5aa0;text-decoration:none;transition:color .2s}
+a:hover{color:#4a9eff}
+ul,ol{padding-left:1.4em}
+li{margin-bottom:.3em}
+
+.main-header{background:#1a2332;border-bottom:3px solid #2c5aa0}
+.header-container{max-width:900px;margin:0 auto;padding:24px 40px;display:flex;align-items:center;justify-content:space-between}
+.header-logo h1{margin:0;font-size:22px;font-weight:800;color:#fff;letter-spacing:.5px}
+.header-tagline{margin:4px 0 0;font-size:11px;color:#8a93a3;text-transform:uppercase;letter-spacing:1px}
+.header-meta{text-align:right;font-size:12px;color:#8a93a3;line-height:1.7}
+.header-meta strong{display:block;color:#fff;font-size:13px;margin-bottom:2px}
+
+.breadcrumb-bar{background:#2c3e50;border-bottom:1px solid #34495e;padding:12px 0}
+.breadcrumb-container{max-width:900px;margin:0 auto;padding:0 40px;font-size:12px;color:#95a5a6}
+.breadcrumb-current{color:#ecf0f1;font-weight:600}
+.sep{color:#7f8c8d;margin:0 8px}
+
+.container{max-width:900px;margin:0 auto;padding:40px 40px 80px}
+
+.section-head{font-size:11px;font-weight:700;color:#6c757d;text-transform:uppercase;letter-spacing:.8px;border-bottom:3px solid #2c5aa0;padding-bottom:10px;margin:0 0 28px;display:flex;align-items:center;gap:12px}
+.section-head span.title{font-size:18px;font-weight:800;color:#1a2332;text-transform:uppercase;letter-spacing:.4px}
+.snum{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#2c5aa0;color:#fff;font-size:12px;font-weight:800;flex-shrink:0}
+
+.card{background:#fff;border:1px solid #dee2e6;padding:24px 28px;margin-bottom:20px}
+.card-title{font-size:12px;font-weight:700;color:#6c757d;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.card-body{font-size:13.5px;color:#495057;line-height:1.65}
+.card-body strong{color:#1a2332}
+
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#dee2e6;border:1px solid #dee2e6;margin-bottom:24px}
+.stat-item{background:#fff;padding:16px 18px}
+.stat-value{font-size:22px;font-weight:800;color:#2c5aa0;margin-bottom:3px;display:block}
+.stat-value.neg{color:#a02c2c}
+.stat-value.pos{color:#1a6b3a}
+.stat-label{font-size:10px;color:#6c757d;text-transform:uppercase;letter-spacing:.5px}
+.stat-delta{font-size:11px;font-weight:600;margin-top:4px}
+.dn{color:#a02c2c}
+.up{color:#1a6b3a}
+.nu{color:#6c757d}
+
+.table-wrap{border:1px solid #dee2e6;margin-bottom:20px;overflow:hidden}
+.table-label{background:#f8f9fa;border-bottom:2px solid #dee2e6;padding:10px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#495057;display:flex;justify-content:space-between;align-items:center}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:13px}
+thead{background:#f8f9fa;border-bottom:2px solid #dee2e6}
+th{padding:10px 14px;text-align:left;font-size:11px;color:#6c757d;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+th.r{text-align:right}
+td{padding:9px 14px;color:#495057;border-bottom:1px solid #e9ecef}
+td.r{text-align:right;font-variant-numeric:tabular-nums}
+tr:hover td{background:#f8f9fa}
+tr:last-child td{border-bottom:none}
+
+.badge{display:inline-block;padding:3px 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.bh{background:#f8d7da;color:#721c24}
+.bm{background:#fff3cd;color:#856404}
+.bl{background:#d4edda;color:#155724}
+.bi{background:#d1ecf1;color:#0c5460}
+
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:20px 20px 0}
+.price-card{background:#f8f9fa;border:1px solid #dee2e6;padding:16px 18px}
+.price-stage{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6c757d;margin-bottom:8px}
+.price-row{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px}
+.price-row .lbl{color:#6c757d}
+.price-row .val{font-weight:600;color:#1a2332}
+.price-prem{font-size:16px;font-weight:800;color:#2c5aa0;margin-top:6px}
+.price-note{font-size:11px;color:#6c757d;margin-top:6px;line-height:1.4}
+
+.rec{background:#fff;border:1px solid #dee2e6;border-left:4px solid #2c5aa0;padding:18px 22px;margin-bottom:14px}
+.rec.crit{border-left-color:#a02c2c}
+.rec.hi{border-left-color:#c87c10}
+.rec.med{border-left-color:#2c5aa0}
+.rec-hd{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.rec-title{font-size:13px;font-weight:700;color:#1a2332;text-transform:uppercase;letter-spacing:.3px}
+.rec-body{font-size:13px;color:#495057;line-height:1.6}
+.rec-body ul{margin-top:8px}
+.rec-body li{margin-bottom:5px}
+.rec-body strong{color:#1a2332;font-weight:600}
+
+.seg-divider{height:3px;background:#1a2332;margin:48px 0 40px}
+
+.findings{list-style:none;margin-bottom:0}
+.finding{display:grid;grid-template-columns:26px 1fr;gap:14px;padding:15px 0;border-bottom:1px solid #e9ecef}
+.finding:last-child{border-bottom:none}
+.fn{font-size:12px;font-weight:800;color:#dee2e6;padding-top:2px;text-align:right}
+.ft{font-size:13.5px;font-weight:700;color:#1a2332;margin-bottom:5px}
+.fb{font-size:13px;color:#495057;line-height:1.6}
+.fb strong{color:#1a2332;font-weight:600}
+
+.placeholder{border:2px dashed #dee2e6;padding:24px;text-align:center;margin-top:40px}
+.placeholder-text{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#adb5bd}
+
+.main-footer{background:#1a2332;border-top:1px solid #2c3e50;padding:20px 0}
+.footer-container{max-width:900px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between}
+.footer-text{font-size:12px;color:#8a93a3;margin:0}
+
+.section-block{margin-bottom:0}
+.recs-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6c757d;margin:24px 0 14px}
+</style>
+</head>
+<body>
+
+<header class="main-header">
+  <div class="header-container">
+    <div class="header-logo">
+      <h1>Canopy Management</h1>
+      <p class="header-tagline">Amazon Market Intelligence</p>
+    </div>
+    <div class="header-meta">
+      <strong>Oak Valley Designs</strong>
+      Search Query Performance · US · April 2026<br>
+      Brand View · Monthly · Exported May 6, 2026
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-container">
+    Canopy Management <span class="sep">›</span> Oak Valley Designs <span class="sep">›</span>
+    <span class="breadcrumb-current">SQP Report — April 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══ SEGMENT 01 ══ -->
+<div class="section-block">
+  <div class="section-head">
+    <span class="snum">01</span>
+    <span class="title">April 2026 — Brand Funnel Analysis</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Overview</div>
+    <div class="card-body">The brand is capturing significant search volume across 20 terms totaling <strong>1,162,892 searches</strong>, generating <strong>25,396,586 impressions</strong>, <strong>394,973 clicks</strong>, <strong>57,492 cart adds</strong>, and <strong>9,170 purchases</strong>. The biggest drop-off occurs at the <strong>cart-to-purchase stage (15.95%)</strong> — customers are adding to cart but abandoning before checkout. Click-to-cart (14.55%) and CTR (1.56%) are relatively healthy; the primary challenge is closing sales once purchase intent has been shown.</div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-value">1.16M</span><div class="stat-label">Search Volume</div><div class="stat-delta nu">20 tracked terms</div></div>
+    <div class="stat-item"><span class="stat-value">394K</span><div class="stat-label">Total Clicks</div><div class="stat-delta nu">CTR 1.56%</div></div>
+    <div class="stat-item"><span class="stat-value">57.5K</span><div class="stat-label">Cart Adds</div><div class="stat-delta nu">Cart rate 14.55%</div></div>
+    <div class="stat-item"><span class="stat-value neg">9,170</span><div class="stat-label">Purchases</div><div class="stat-delta dn">Conv 15.95% ← bottleneck</div></div>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-label">Top Search Terms by Volume</div>
+    <table>
+      <thead><tr><th>Search Query</th><th class="r">Volume</th><th class="r">Impressions</th><th class="r">Clicks</th><th class="r">CTR%</th><th class="r">Cart Adds</th><th class="r">Cart%</th><th class="r">Purchases</th><th class="r">Conv%</th></tr></thead>
+      <tbody>
+        <tr><td>peel and stick floor tile</td><td class="r">220,981</td><td class="r">5,266,866</td><td class="r">96,935</td><td class="r">1.84</td><td class="r">14,489</td><td class="r">14.95</td><td class="r">1,342</td><td class="r">9.26</td></tr>
+        <tr><td>stair treads for wooden steps</td><td class="r">147,717</td><td class="r">3,808,981</td><td class="r">71,750</td><td class="r">1.88</td><td class="r">7,954</td><td class="r">11.09</td><td class="r">2,061</td><td class="r">25.91</td></tr>
+        <tr><td>floor mats</td><td class="r">129,580</td><td class="r">3,114,434</td><td class="r">39,598</td><td class="r">1.27</td><td class="r">6,049</td><td class="r">15.28</td><td class="r">1,757</td><td class="r">29.05</td></tr>
+        <tr><td>peel and stick tile</td><td class="r">118,739</td><td class="r">2,889,245</td><td class="r">48,574</td><td class="r">1.68</td><td class="r">7,181</td><td class="r">14.78</td><td class="r">569</td><td class="r">7.92</td></tr>
+        <tr><td>stair treads</td><td class="r">61,891</td><td class="r">1,791,987</td><td class="r">26,654</td><td class="r">1.49</td><td class="r">2,700</td><td class="r">10.13</td><td class="r">657</td><td class="r">24.33</td></tr>
+        <tr><td>floor mat</td><td class="r">36,338</td><td class="r">1,050,257</td><td class="r">13,788</td><td class="r">1.31</td><td class="r">1,602</td><td class="r">11.62</td><td class="r">617</td><td class="r">38.51</td></tr>
+        <tr><td>stair runner</td><td class="r">34,884</td><td class="r">900,136</td><td class="r">12,478</td><td class="r">1.39</td><td class="r">1,363</td><td class="r">10.92</td><td class="r">187</td><td class="r">13.72</td></tr>
+        <tr><td>carpet stair treads</td><td class="r">17,125</td><td class="r">500,447</td><td class="r">8,140</td><td class="r">1.63</td><td class="r">784</td><td class="r">9.63</td><td class="r">169</td><td class="r">21.56</td></tr>
+        <tr><td>outdoor stair treads</td><td class="r">12,833</td><td class="r">350,139</td><td class="r">6,425</td><td class="r">1.83</td><td class="r">1,128</td><td class="r">17.56</td><td class="r">310</td><td class="r">27.48</td></tr>
+        <tr><td>peel and stick stair treads</td><td class="r">11,107</td><td class="r">278,250</td><td class="r">4,978</td><td class="r">1.79</td><td class="r">567</td><td class="r">11.39</td><td class="r">64</td><td class="r">11.29</td></tr>
+        <tr><td>bullnose carpet stair treads</td><td class="r">7,344</td><td class="r">192,055</td><td class="r">4,051</td><td class="r">2.11</td><td class="r">287</td><td class="r">7.08</td><td class="r">26</td><td class="r">9.06</td></tr>
+        <tr><td>bullnose stair treads for wooden steps</td><td class="r">6,248</td><td class="r">135,374</td><td class="r">3,400</td><td class="r">1.48</td><td class="r">340</td><td class="r">10.00</td><td class="r">34</td><td class="r">10.00</td></tr>
+        <tr><td>indoor rugs</td><td class="r">5,800</td><td class="r">163,918</td><td class="r">2,987</td><td class="r">1.30</td><td class="r">194</td><td class="r">6.49</td><td class="r">34</td><td class="r">17.53</td></tr>
+        <tr><td>carpet for stairs</td><td class="r">11,984</td><td class="r">300,031</td><td class="r">5,231</td><td class="r">1.74</td><td class="r">544</td><td class="r">10.40</td><td class="r">114</td><td class="r">20.96</td></tr>
+        <tr><td>oak valley designs stair treads</td><td class="r">2,344</td><td class="r">61,260</td><td class="r">1,400</td><td class="r">2.28</td><td class="r">78</td><td class="r">5.57</td><td class="r">9</td><td class="r">11.54</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+    <div class="table-wrap" style="margin-bottom:0">
+      <div class="table-label">Low CTR <span class="badge bh">Critical</span></div>
+      <table><thead><tr><th>Term</th><th class="r">Volume</th><th class="r">CTR%</th></tr></thead>
+      <tbody>
+        <tr><td>floor mats</td><td class="r">129,580</td><td class="r">1.27</td></tr>
+        <tr><td>stair treads</td><td class="r">61,891</td><td class="r">1.49</td></tr>
+        <tr><td>floor mat</td><td class="r">36,338</td><td class="r">1.31</td></tr>
+        <tr><td>stair runner</td><td class="r">34,884</td><td class="r">1.39</td></tr>
+        <tr><td>stairs</td><td class="r">13,072</td><td class="r">1.35</td></tr>
+      </tbody></table>
+    </div>
+    <div class="table-wrap" style="margin-bottom:0">
+      <div class="table-label">Low Cart Rate <span class="badge bh">Critical</span></div>
+      <table><thead><tr><th>Term</th><th class="r">Clicks</th><th class="r">Cart%</th></tr></thead>
+      <tbody>
+        <tr><td>bullnose carpet…</td><td class="r">4,051</td><td class="r">7.08</td></tr>
+        <tr><td>indoor rugs</td><td class="r">2,987</td><td class="r">6.49</td></tr>
+        <tr><td>bullnose stair treads</td><td class="r">1,616</td><td class="r">6.37</td></tr>
+        <tr><td>oak valley designs…</td><td class="r">1,400</td><td class="r">5.57</td></tr>
+        <tr><td>vinyl stair treads</td><td class="r">1,295</td><td class="r">5.87</td></tr>
+      </tbody></table>
+    </div>
+    <div class="table-wrap" style="margin-bottom:0">
+      <div class="table-label">Low Conversion <span class="badge bm">High</span></div>
+      <table><thead><tr><th>Term</th><th class="r">Carts</th><th class="r">Conv%</th></tr></thead>
+      <tbody>
+        <tr><td>peel+stick floor tile</td><td class="r">14,489</td><td class="r">9.26</td></tr>
+        <tr><td>peel+stick tile</td><td class="r">7,181</td><td class="r">7.92</td></tr>
+        <tr><td>stair runner</td><td class="r">1,363</td><td class="r">13.72</td></tr>
+        <tr><td>peel+stick stair treads</td><td class="r">567</td><td class="r">11.29</td></tr>
+        <tr><td>stairs</td><td class="r">462</td><td class="r">13.42</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <!-- Price positioning -->
+  <div class="table-wrap">
+    <div class="table-label">Price Positioning — Brand vs Market Median</div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-stage">At Clicks</div>
+        <div class="price-row"><span class="lbl">Market median</span><span class="val">$123.51</span></div>
+        <div class="price-row"><span class="lbl">Brand median</span><span class="val">$230.40</span></div>
+        <div class="price-prem">+86.6% premium</div>
+        <div class="price-note">Positioned premium but potentially deterring price-sensitive shoppers on broad terms.</div>
+      </div>
+      <div class="price-card">
+        <div class="price-stage">At Cart Adds</div>
+        <div class="price-row"><span class="lbl">Market median</span><span class="val">$121.04</span></div>
+        <div class="price-row"><span class="lbl">Brand median</span><span class="val">$272.44</span></div>
+        <div class="price-prem">+125.1% premium</div>
+        <div class="price-note">Only customers comfortable with premium pricing are proceeding to cart.</div>
+      </div>
+      <div class="price-card">
+        <div class="price-stage">At Purchases</div>
+        <div class="price-row"><span class="lbl">Market median</span><span class="val">$63.28</span></div>
+        <div class="price-row"><span class="lbl">Brand median</span><span class="val">$295.70</span></div>
+        <div class="price-prem" style="color:#1a6b3a">+367.3% premium</div>
+        <div class="price-note">Buyers completing transactions are selecting ultra-premium products or multi-unit bundles.</div>
+      </div>
+    </div>
+    <div style="padding:16px 20px 20px">
+      <div class="card-body" style="font-size:13px">The brand operates <strong>2–4× market median</strong> depending on funnel stage. The widening gap from click to purchase (87% → 367%) reflects product mix segmentation — lower-priced entry SKUs attract clicks but premium SKUs dominate actual sales, creating conversion friction as budget-conscious clickers drop off.</div>
+    </div>
+  </div>
+
+  <!-- Recommendations -->
+  <div class="recs-label">Recommendations</div>
+
+  <div class="rec crit">
+    <div class="rec-hd"><span class="badge bh">Critical</span><span class="rec-title">Fix Low CTR on High-Volume Generic Terms</span></div>
+    <div class="rec-body"><strong>Terms:</strong> "floor mats," "stair treads," "floor mat," "stair runner," "stairs" — 277,765 monthly searches at 1.27–1.49% CTR. Main images and titles aren't winning the visual fight on broad searches.<ul><li><strong>Main Image:</strong> Lifestyle shots showing treads installed on wooden stairs. White-background shots lose on broad terms.</li><li><strong>Title Front-Loading:</strong> Move the strongest differentiator into the first 60 characters.</li><li><strong>Bid Adjustment:</strong> Increase bids 30–50% to secure top-of-search placement. Premium pricing supports higher CPC if conversion follows.</li></ul></div>
+  </div>
+
+  <div class="rec crit">
+    <div class="rec-hd"><span class="badge bh">Critical</span><span class="rec-title">Address Cart Abandonment on Peel-and-Stick Products</span></div>
+    <div class="rec-body"><strong>Terms:</strong> "peel and stick floor tile" (9.26% conv), "peel and stick tile" (7.92% conv) — 96K and 48K clicks converting at half the rate of stair tread products.<ul><li><strong>A+ Content:</strong> Installation video modules and step-by-step visual guides. Reduce perceived DIY risk.</li><li><strong>Review Harvesting:</strong> Amazon Vine for peel-and-stick SKUs. Target 50+ reviews at 4.3+ stars.</li><li><strong>Bundle Strategy:</strong> "Sample + full coverage" bundles at $79.99–99.99 to reduce quantity anxiety.</li><li><strong>Subscribe &amp; Save:</strong> Enable 15% S&S to lower effective checkout price.</li></ul></div>
+  </div>
+
+  <div class="rec hi">
+    <div class="rec-hd"><span class="badge bm">High</span><span class="rec-title">Rescue Low Cart Rate on Specialty Terms</span></div>
+    <div class="rec-body"><strong>Terms:</strong> "bullnose carpet stair treads" (7.08%), "indoor rugs" (6.49%), "vinyl stair treads" (5.87%) — strong CTR, poor cart adds indicate detail pages don't match search intent.<ul><li><strong>Variation Architecture:</strong> Make bullnose a filterable variation, not buried in bullets.</li><li><strong>Bullet Specificity:</strong> First bullet must address the material query directly.</li><li><strong>A+ Comparison Module:</strong> "Carpet vs Vinyl vs Rubber" chart with clear use cases.</li></ul></div>
+  </div>
+
+  <div class="rec hi">
+    <div class="rec-hd"><span class="badge bm">High</span><span class="rec-title">Price-Segmented Catalog Strategy</span></div>
+    <div class="rec-body">The 87% → 367% premium gap from click to purchase is killing mid-funnel conversion. Budget-conscious clickers drop off when encountering the true price tier.<ul><li><strong>Entry-Level SKU:</strong> Value line at $79–99 targeting "stair treads" broad searches.</li><li><strong>Tiered Campaigns:</strong> Separate SP campaigns for budget SKUs (&lt;$100) vs premium (&gt;$200) by keyword intent.</li><li><strong>Virtual Bundles:</strong> 15-piece sets at $149.99 and 7-piece starter sets at $79.99 from the same base ASIN.</li></ul></div>
+  </div>
+
+  <div class="rec med">
+    <div class="rec-hd"><span class="badge bi">Medium</span><span class="rec-title">Double Down on Hidden Conversion Winners</span></div>
+    <div class="rec-body"><strong>Terms:</strong> "outdoor stair treads" (27.48%), "floor mat" (38.51%), "rubber stair treads" (26.70%) — punch above weight class. Every click is gold.<ul><li><strong>Dedicated ASINs:</strong> Standalone listings for outdoor and rubber variants.</li><li><strong>Sponsored Brand Video:</strong> SBV campaigns for "outdoor stair treads" showing weather resistance.</li><li><strong>Seasonal Deals:</strong> 15% Lightning Deals on rubber and outdoor SKUs during spring/summer.</li></ul></div>
+  </div>
+
+  <div class="rec med">
+    <div class="rec-hd"><span class="badge bi">Medium</span><span class="rec-title">Fix Bullnose Premium Pricing Disconnect</span></div>
+    <div class="rec-body">"Bullnose carpet stair treads" — clicking at $119.99, terrible cart rate (7.08%), weak conversion (9.06%). Premium price without premium perception.<ul><li><strong>Premium A+ Module:</strong> Cross-section diagrams of bullnose construction and durability testing.</li><li><strong>Reposition for Professional Use:</strong> Title and position for "commercial stairs," "luxury homes," or "professional installation."</li><li><strong>Remove from Broad Campaigns:</strong> Only bid exact-match bullnose terms. Stop wasting budget on generic traffic.</li></ul></div>
+  </div>
+</div>
+
+
+<!-- ══ SEGMENT 02 ══ -->
+<div class="seg-divider"></div>
+
+<div class="section-block">
+  <div class="section-head">
+    <span class="snum">02</span>
+    <span class="title">Monthly Comparison — March vs April 2026</span>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-value neg">538K</span><div class="stat-label">Brand Impressions</div><div class="stat-delta dn">−23.4% vs March 702K</div></div>
+    <div class="stat-item"><span class="stat-value neg">16.5K</span><div class="stat-label">Brand Clicks</div><div class="stat-delta dn">−25.3% · CTR 3.06% vs 3.14%</div></div>
+    <div class="stat-item"><span class="stat-value neg">962</span><div class="stat-label">Brand Cart Adds</div><div class="stat-delta dn">Click→Cart 5.8% vs 7.3%</div></div>
+    <div class="stat-item"><span class="stat-value pos">58</span><div class="stat-label">Brand Purchases</div><div class="stat-delta up">Cart→Pur 6.0% vs 4.2% ↑</div></div>
+  </div>
+
+  <ul class="findings">
+    <li class="finding"><span class="fn">01</span><div><div class="ft"><span class="badge bh" style="margin-right:7px">Visibility</span>Brand impression share contracted despite a stable category</div><div class="fb">Total category impressions flat (33.9M → 33.6M) — demand held. Brand impressions dropped <strong>23%</strong> (702K → 538K), share falling from <strong>2.1% to 1.6%</strong>. At 2× the category price point, OVD doesn't need to own the category — but this rate of share loss on core keywords warrants attention.</div></div></li>
+    <li class="finding"><span class="fn">02</span><div><div class="ft"><span class="badge bh" style="margin-right:7px">Clicks</span>Brand clicks followed impressions down — but CTR held</div><div class="fb">Brand clicks fell <strong>25%</strong> (22K → 16.5K), click share from 3.9% to 3.0%. CTR was essentially unchanged (3.14% → 3.06%), confirming the problem is <strong>visibility, not relevance</strong>. Shoppers who see OVD click at a consistent rate — they're just seeing it less.</div></div></li>
+    <li class="finding"><span class="fn">03</span><div><div class="ft"><span class="badge bl" style="margin-right:7px">Conversion</span>Cart-to-purchase conversion nearly doubled — the standout positive</div><div class="fb">Cart-to-purchase improved from <strong>4.2% to 6.0%</strong>. Premium buyers who committed in April followed through at a meaningfully higher rate. This is the metric that matters most for a high-ASP brand, and it moved in the right direction.</div></div></li>
+    <li class="finding"><span class="fn">04</span><div><div class="ft"><span class="badge bh" style="margin-right:7px">Mid-Funnel</span>Click-to-cart slipped — listing content gap confirmed</div><div class="fb">Brand click-to-cart dropped from <strong>7.3% to 5.8%</strong>. Shoppers are finding the listings, clicking, then hesitating. At a $300+ price point this is expected friction — but the Prompts report already identified exactly what those hesitation points are: fade confidence, installation permanence, reinforced edge credibility.</div></div></li>
+    <li class="finding"><span class="fn">05</span><div><div class="ft"><span class="badge bl" style="margin-right:7px">Brand</span>Branded search is strengthening — awareness is building</div><div class="fb">The biggest impression share gainers are almost entirely branded: <strong>"oak valley designs stair treads" (+23.8pp)</strong>, "oak valley stair tread" (+16.4pp), "oak valley brindle" (+11.8pp). Buyers are searching for OVD by name at increasing rates. For a premium brand this is the right trajectory.</div></div></li>
+    <li class="finding"><span class="fn">06</span><div><div class="ft"><span class="badge bh" style="margin-right:7px">Competitive</span>Core differentiator keywords ceding ground to competitors</div><div class="fb">Biggest losers are feature-specific: <strong>"35 bullnose carpet stair treads" (−17.2pp)</strong>, "rounded bullnose carpet stair treads" (−16.4pp), "stair treads for wooden steps rounded" (−10.6pp). These are high-intent searches where OVD should be dominant. Losing share here to cheaper alternatives is the most actionable problem in this report.</div></div></li>
+    <li class="finding"><span class="fn">07</span><div><div class="ft"><span class="badge bm" style="margin-right:7px">Volume</span>The category's highest-volume query is largely untapped</div><div class="fb">"Stair treads for wooden steps" — <strong>147K monthly searches</strong>, 89K brand impressions but 2.34% brand share and only 5 purchases. At 89K impressions already served, 5 purchases is leaving real revenue on the table regardless of positioning strategy.</div></div></li>
+    <li class="finding"><span class="fn">08</span><div><div class="ft"><span class="badge bh" style="margin-right:7px">Stability</span>54% query churn between months is a structural concern</div><div class="fb"><strong>539 new queries in April, 539 gone from March</strong> — out of 1,000 total rows each month. Only 461 matched across both periods. This level of volatility reflects either significant seasonal shift or inconsistent SERP presence. A brand with stable demand shouldn't be disappearing from half its tracked queries month to month.</div></div></li>
+    <li class="finding"><span class="fn">09</span><div><div class="ft"><span class="badge bi" style="margin-right:7px">Opportunity</span>Wool and bullnose signals growing — Nantucket has room to run</div><div class="fb">"Wool carpet stair treads" jumped <strong>+10.7pp impression share</strong> (11.5% → 22.2%). Nantucket is the only wool product in the lineup and its listing currently has zero fade messaging — the #1 purchase driver in the category per the Prompts data. A fixable gap on a query moving in the right direction.</div></div></li>
+    <li class="finding"><span class="fn">10</span><div><div class="ft"><span class="badge bh" style="margin-right:7px">Funnel</span>58 purchases from 537K brand impressions tells the real story</div><div class="fb">Full funnel: Impr → Click <strong>(3.1%)</strong> → Cart <strong>(5.8%)</strong> → Purchase <strong>(6.0%)</strong>. For a brand at 2× category price, low purchase volume per impression is acceptable — what's not acceptable is that the cart-to-purchase rate, now improving, was historically so weak. The April recovery suggests buyers are more qualified. Priority: protect impression share on branded and feature terms so that qualified traffic keeps arriving.</div></div></li>
+  </ul>
+</div>
+
+
+
+</div>
+
+<footer class="main-footer">
+  <div class="footer-container">
+    <p class="footer-text">Canopy Management · Amazon Market Intelligence</p>
+    <p class="footer-text">Oak Valley Designs · SQP Report · April 2026 · Confidential</p>
+  </div>
+</footer>
+
+</body>
+</html>
