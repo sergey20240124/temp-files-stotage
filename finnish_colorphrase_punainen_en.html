@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finnish Phrases: Punainen</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #f0f4f8; }
+        .card { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); text-align: center; width: 85%; max-width: 450px; }
+        #title { font-size: 1.5rem; font-weight: bold; color: #003580; margin-bottom: 0.5rem; min-height: 2.5rem; }
+        #phrase { font-size: 1.3rem; font-weight: bold; color: #003580; margin-bottom: 0.5rem; min-height: 2.5rem; }
+        #translation { font-size: 1.2rem; color: #666; margin-bottom: 1.5rem; min-height: 1.5rem; }
+        button { padding: 16px 32px; font-size: 1.2rem; font-weight: 600; border: none; border-radius: 8px; background: #003580; color: white; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #002255; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div id="title">Finnish Phrases: Punainen</div>
+        <div id="phrase">Press Start to Begin</div>
+        <div id="translation"></div>
+        <button id="btn">Start</button>
+    </div>
+    <script>
+        const list = [{ fi: "Ostin punaisen auton.", en: "I bought a red car." }, { fi: "Minulla on punainen omena.", en: "I have a red apple." }, { fi: "Tuolla on punainen kukka.", en: "There's a red flower over there." }, { fi: "Näen punaisen talon.", en: "I see a red house." }, { fi: "Puen punaisen paidan.", en: "I put on a red shirt." }];
+        let idx = 0, rep = 0, timer = null, active = false, currentAudio = null;
+        const pEl = document.getElementById('phrase'), tEl = document.getElementById('translation'), bEl = document.getElementById('btn');
+        function say(txt) {
+            if (currentAudio) currentAudio.pause();
+            currentAudio = new Audio('https://translate.google.com/translate_tts?ie=UTF-8&tl=fi&client=tw-ob&q=' + encodeURIComponent(txt));
+            currentAudio.play().catch(e => console.log('Audio error:', e));
+        }
+        function step() {
+            if (!active) return;
+            const item = list[idx];
+            pEl.textContent = item.fi;
+            tEl.textContent = item.en + ' (repeat ' + (rep + 1) + '/3)';
+            say(item.fi);
+            rep++;
+            if (rep < 3) { timer = setTimeout(step, 5000); }
+            else { rep = 0; idx++; if (idx < list.length) { timer = setTimeout(step, 5000); } else { pEl.textContent = "Done!"; tEl.textContent = "All phrases completed"; bEl.textContent = "Start"; active = false; } }
+        }
+        bEl.addEventListener('click', () => {
+            if (active) { clearTimeout(timer); if (currentAudio) currentAudio.pause(); active = false; bEl.textContent = 'Start'; pEl.textContent = 'Paused'; tEl.textContent = ''; }
+            else { active = true; bEl.textContent = 'Stop'; idx = 0; rep = 0; step(); }
+        });
+    </script>
+</body>
+</html>
