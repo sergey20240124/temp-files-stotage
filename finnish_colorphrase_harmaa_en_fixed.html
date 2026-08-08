@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finnish Phrases: Harmaa</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #f0f4f8; }
+        .card { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); text-align: center; width: 85%; max-width: 450px; }
+        .title { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin-bottom: 1.5rem; }
+        #phrase { font-size: 1.4rem; font-weight: bold; color: #003580; margin-bottom: 0.5rem; min-height: 3rem; }
+        #translation { font-size: 1.1rem; color: #555; margin-bottom: 1.5rem; min-height: 1.5rem; }
+        button { padding: 16px 32px; font-size: 1.2rem; font-weight: 600; border: none; border-radius: 8px; background: #003580; color: white; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #002255; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="title">Finnish Phrases: Harmaa</div>
+        <div id="phrase">Press Start to Begin</div>
+        <div id="translation"></div>
+        <button id="btn">Start</button>
+    </div>
+    <script>
+        const list = [
+            { fi: "Taivaalla on harmaa pilvi.", en: "There's a grey cloud in the sky." },
+            { fi: "Minulla on harmaa kissa.", en: "I have a grey cat." },
+            { fi: "Taivas on harmaa.", en: "The sky is grey." },
+            { fi: "Asun harmaassa talossa.", en: "I live in a grey house." },
+            { fi: "Ostin harmaan auton.", en: "I bought a grey car." }
+        ];
+
+        let idx = 0, rep = 0, timer = null, active = false;
+        const pEl = document.getElementById('phrase'), tEl = document.getElementById('translation'), bEl = document.getElementById('btn');
+
+        function say(txt, onFinish) {
+            window.speechSynthesis.cancel(); // Stop any pending speech
+            const utterance = new SpeechSynthesisUtterance(txt);
+            utterance.lang = 'fi-FI';
+            utterance.rate = 0.9; // Slightly deliberate pace for language learners
+
+            utterance.onend = () => {
+                if (onFinish) onFinish();
+            };
+
+            utterance.onerror = (e) => {
+                console.error('Speech Synthesis Error:', e);
+                if (onFinish) onFinish();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function step() {
+            if (!active) return;
+            const item = list[idx];
+            pEl.textContent = item.fi;
+            tEl.textContent = `${item.en} (${rep + 1}/3)`;
+
+            say(item.fi, () => {
+                rep++;
+                if (rep < 3) {
+                    timer = setTimeout(step, 2500); // 2.5s pause after speech ends before repeating
+                } else {
+                    rep = 0;
+                    idx++;
+                    if (idx < list.length) {
+                        timer = setTimeout(step, 3500); // Pause between different phrases
+                    } else {
+                        pEl.textContent = "Done!";
+                        tEl.textContent = "All phrases completed";
+                        bEl.textContent = "Start";
+                        active = false;
+                    }
+                }
+            });
+        }
+
+        bEl.addEventListener('click', () => {
+            if (active) {
+                clearTimeout(timer);
+                window.speechSynthesis.cancel();
+                active = false;
+                bEl.textContent = 'Start';
+                pEl.textContent = 'Paused';
+                tEl.textContent = '';
+            } else {
+                active = true;
+                bEl.textContent = 'Stop';
+                idx = 0;
+                rep = 0;
+                step();
+            }
+        });
+    </script>
+</body>
+</html>
